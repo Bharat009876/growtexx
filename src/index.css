@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 40% 13%;
+    --background: 220 50% 8%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 40% 13%;
+    --card: 220 45% 11%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 13%;
+    --popover: 220 45% 11%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 215 90% 42%;
+    --primary: 215 90% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 60% 40%;
+    --secondary: 160 60% 42%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 15% 92%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 220 30% 16%;
+    --muted-foreground: 220 10% 72%;
 
     --accent: 42 90% 55%;
     --accent-foreground: 220 40% 13%;
@@ -30,14 +30,14 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 215 90% 42%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 215 90% 55%;
 
     --radius: 0.75rem;
 
-    --hero-bg: 220 30% 95%;
-    --hero-foreground: 220 40% 13%;
+    --hero-bg: 220 50% 8%;
+    --hero-foreground: 0 0% 100%;
     --gradient-primary: 215 90% 42%;
     --gradient-secondary: 160 60% 40%;
     --gradient-accent: 42 90% 55%;
@@ -122,6 +122,6 @@
     border: 1px solid hsl(0 0% 100% / 0.12);
   }
   .section-padding {
-    @apply py-24 md:py-32 px-4;
+    @apply py-16 md:py-28 px-4;
   }
 }

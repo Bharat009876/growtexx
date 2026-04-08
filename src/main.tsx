@@ -3,6 +3,8 @@ import App from "./App.tsx";
 import "./index.css";
 import logo from "@/assets/logo.png";
 
+document.documentElement.classList.add("dark");
+
 const setFavicon = () => {
   let icon = document.querySelector<HTMLLinkElement>("link[rel='icon']");
   if (!icon) {

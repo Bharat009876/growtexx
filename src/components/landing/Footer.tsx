@@ -1,4 +1,4 @@
-import { Linkedin, Twitter, Instagram, Mail } from "lucide-react";
+import { Linkedin, Instagram, Mail } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
@@ -34,14 +34,15 @@ const Footer = () => (
           <h4 className="font-heading font-bold text-lg mb-4">Connect</h4>
           <div className="flex gap-3 mb-4">
             {[
-              { icon: Linkedin, href: "#" },
-              { icon: Twitter, href: "#" },
-              { icon: Instagram, href: "#" },
+              { icon: Linkedin, href: "https://www.linkedin.com/company/growtex-ventures/" },
+              { icon: Instagram, href: "https://www.instagram.com/growtex.in?igsh=OTk5NTBkdjU0aGpm" },
               { icon: Mail, href: "mailto:info@growtex.in" },
             ].map((social, i) => (
               <a
                 key={i}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border border-hero-foreground/10 flex items-center justify-center hover:bg-hero-foreground/10 transition-colors"
               >
                 <social.icon size={18} className="text-hero-foreground/60" />

@@ -26,6 +26,9 @@ const industries = [
   "Other",
 ];
 
+const annualRevenueOptions = ["0-50L", "50L-2Cr", "2Cr-10Cr", "10Cr+"];
+const exportStatusOptions = ["Yes", "No"];
+
 const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,6 +39,8 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
     company: "",
     product: "",
     industry: "",
+    annualRevenue: "",
+    currentlyExporting: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,6 +63,8 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
           `Company: ${formData.company}`,
           `Product/Service: ${formData.product}`,
           `Industry: ${formData.industry || "Not selected"}`,
+          `Annual Revenue: ${formData.annualRevenue || "Not selected"}`,
+          `Currently Exporting: ${formData.currentlyExporting || "Not selected"}`,
         ].join("\n"),
       );
 
@@ -65,6 +72,8 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
       formPayload.append("company", formData.company);
       formPayload.append("product", formData.product);
       formPayload.append("industry", formData.industry || "Not selected");
+      formPayload.append("annual_revenue", formData.annualRevenue || "Not selected");
+      formPayload.append("currently_exporting", formData.currentlyExporting || "Not selected");
 
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -80,7 +89,16 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
         title: "Request submitted! 🎉",
         description: "Our export specialist will reach out within 24 hours.",
       });
-      setFormData({ fullName: "", phone: "", email: "", company: "", product: "", industry: "" });
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        company: "",
+        product: "",
+        industry: "",
+        annualRevenue: "",
+        currentlyExporting: "",
+      });
       onOpenChange(false);
     } catch (error) {
       toast({
@@ -150,6 +168,38 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">Annual Revenue</Label>
+              <Select value={formData.annualRevenue} onValueChange={(v) => update("annualRevenue", v)}>
+                <SelectTrigger className="bg-background/80 border-border text-foreground">
+                  <SelectValue placeholder="Select annual revenue" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover border-border">
+                  {annualRevenueOptions.map((option) => (
+                    <SelectItem key={option} value={option} className="text-foreground hover:bg-muted">
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">Do You Currently Export?</Label>
+              <Select value={formData.currentlyExporting} onValueChange={(v) => update("currentlyExporting", v)}>
+                <SelectTrigger className="bg-background/80 border-border text-foreground">
+                  <SelectValue placeholder="Select yes or no" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover border-border">
+                  {exportStatusOptions.map((option) => (
+                    <SelectItem key={option} value={option} className="text-foreground hover:bg-muted">
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <Button variant="hero" type="submit" className="w-full py-6 text-base font-bold rounded-xl mt-2" disabled={isSubmitting}>
             {isSubmitting ? "Submitting..." : "Submit Enquiry →"}
