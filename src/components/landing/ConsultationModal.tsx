@@ -28,7 +28,7 @@ const industries = [
 
 const annualRevenueOptions = ["0-50L", "50L-2Cr", "2Cr-10Cr", "10Cr+"];
 const exportStatusOptions = ["Yes", "No"];
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+const scriptURL = import.meta.env.VITE_GOOGLE_SHEETS_URL;
 
 const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
   const { toast } = useToast();
@@ -49,46 +49,25 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
     setIsSubmitting(true);
 
     try {
-      if (!WEB3FORMS_KEY) {
-        throw new Error("Missing VITE_WEB3FORMS_KEY");
-      }
-
-      const formPayload = new FormData();
-      formPayload.append("access_key", WEB3FORMS_KEY);
-      formPayload.append("subject", "New Consultation Request - Growtex Project");
-      formPayload.append("from_name", "Growtex Project Website");
-      formPayload.append("name", formData.fullName);
-      formPayload.append("email", formData.email);
-      formPayload.append(
-        "message",
-        [
-          `Name: ${formData.fullName}`,
-          `Phone: ${formData.phone}`,
-          `Email: ${formData.email}`,
-          `Company: ${formData.company}`,
-          `Product/Service: ${formData.product}`,
-          `Industry: ${formData.industry || "Not selected"}`,
-          `Annual Revenue: ${formData.annualRevenue || "Not selected"}`,
-          `Currently Exporting: ${formData.currentlyExporting || "Not selected"}`,
-        ].join("\n"),
-      );
-
-      formPayload.append("phone", formData.phone);
-      formPayload.append("company", formData.company);
-      formPayload.append("product", formData.product);
-      formPayload.append("industry", formData.industry || "Not selected");
-      formPayload.append("annual_revenue", formData.annualRevenue || "Not selected");
-      formPayload.append("currently_exporting", formData.currentlyExporting || "Not selected");
-
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formPayload,
+      const formPayload = JSON.stringify({
+        fullName: formData.fullName,
+        phoneNumber: formData.phone,
+        businessEmail: formData.email,
+        companyName: formData.company,
+        whatDoYouSell: formData.product,
+        industry: formData.industry || "Not selected",
+        annualRevenue: formData.annualRevenue || "Not selected",
+        currentlyExport: formData.currentlyExporting || "Not selected"
       });
 
-      const result = await response.json();
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || "Submission failed");
-      }
+      await fetch(scriptURL, {
+        method: "POST",
+        body: formPayload,
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        }
+      });
 
       toast({
         title: "Request submitted! 🎉",
