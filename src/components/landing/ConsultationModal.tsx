@@ -28,6 +28,7 @@ const industries = [
 
 const annualRevenueOptions = ["0-50L", "50L-2Cr", "2Cr-10Cr", "10Cr+"];
 const exportStatusOptions = ["Yes", "No"];
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
 const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
   const { toast } = useToast();
@@ -48,8 +49,12 @@ const ConsultationModal = ({ open, onOpenChange }: ConsultationModalProps) => {
     setIsSubmitting(true);
 
     try {
+      if (!WEB3FORMS_KEY) {
+        throw new Error("Missing VITE_WEB3FORMS_KEY");
+      }
+
       const formPayload = new FormData();
-      formPayload.append("access_key", "ee3db098-4d57-4121-ac94-ed52460b83f5");
+      formPayload.append("access_key", WEB3FORMS_KEY);
       formPayload.append("subject", "New Consultation Request - Growtex Project");
       formPayload.append("from_name", "Growtex Project Website");
       formPayload.append("name", formData.fullName);
