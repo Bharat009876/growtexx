@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import heroGlobe from "@/assets/hero-globe.jpg";
+import heroGlobe from "@/assets/golden-network-map.png";
 import { useCountUp } from "@/hooks/useCountUp";
 
 interface StatItemProps {
@@ -21,7 +21,7 @@ const StatItem = ({ end, suffix, label }: StatItemProps) => {
 };
 
 const stats: StatItemProps[] = [
-  { end: 10000, suffix: "+", label: "Live tenders tracked" },
+  { end: 100000, suffix: "+", label: "Live tenders tracked" },
   { end: 100, suffix: "+", label: "Countries covered" },
   { end: 500, suffix: "+", label: "Indian businesses served" },
   { end: 0, suffix: "Free", label: "To get started" },
@@ -32,14 +32,15 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onBookConsult }: HeroSectionProps) => (
-  <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+  <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-40 pb-20">
     <img
       src={heroGlobe}
       alt="Global trade network visualization"
       className="absolute inset-0 w-full h-full object-cover scale-105"
       loading="eager"
     />
-    <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/62 to-background/40 dark:from-[hsl(220,50%,5%,0.75)] dark:via-[hsl(220,50%,8%,0.85)] dark:to-[hsl(220,50%,8%,0.95)]" />
+    <div className="absolute inset-0 bg-black/60" />
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background dark:from-transparent dark:via-background/80 dark:to-background" />
 
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <div className="absolute top-1/4 left-1/4 w-1 h-1 rounded-full bg-primary/40 animate-pulse" />
@@ -51,10 +52,9 @@ const HeroSection = ({ onBookConsult }: HeroSectionProps) => (
       <div className="mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
         <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-accent/10 border border-accent/40 text-accent text-xs font-semibold tracking-widest uppercase">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
-          India's #1 Export Growth Platform
+          Scaling your business beyond borders
         </span>
       </div>
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold text-foreground dark:text-hero-foreground leading-[1.1] mb-7 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>

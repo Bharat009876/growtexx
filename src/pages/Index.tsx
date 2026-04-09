@@ -55,6 +55,16 @@ const Index = () => {
           Book a Consultation
         </Button>
       </div>
+      {/* Desktop Sticky Consultation Button (Rotated) */}
+      <div className="hidden md:flex fixed right-0 top-1/2 -translate-y-1/2 z-50">
+        <button
+          onClick={() => setConsultOpen(true)}
+          className="gradient-bg text-primary-foreground hover:opacity-90 transition-all px-3 py-8 rounded-r-[1.25rem] font-bold tracking-widest text-xs uppercase cursor-pointer shadow-[0_0_20px_rgba(var(--primary),0.3)]"
+          style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+        >
+          Enquire Now
+        </button>
+      </div>
     </main>
   );
 };
